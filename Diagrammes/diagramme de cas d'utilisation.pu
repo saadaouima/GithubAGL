@@ -1,0 +1,24 @@
+@startuml diagramme de cas d'utilisation
+actor Utilisateur
+actor Administrateur
+actor "Système de paiement" as SP
+
+rectangle "Système" {
+    Utilisateur -- (Rechercher des produits)
+    Utilisateur -- (Passer la commande)
+    Utilisateur -- (Gérer la commande)
+    Utilisateur -- (Créer un compte)
+    (Rechercher des produits) .> (S'authentifier) : <<include>>
+    (Passer la commande) .> (S'authentifier) : <<include>>
+    (Gérer la commande) .> (S'authentifier) : <<include>>
+    (Créer un compte) .> (S'authentifier) : <<include>>
+
+    Administrateur -- (Ajouter produit)
+    Administrateur -- (Modifier produit)
+    Administrateur -- (Supprimer produit)
+
+    SP -- (Valider des paiements)
+    (Valider des paiements) -- (Par carte)
+    (Valider des paiements) -- (MoneyGram)
+}
+@enduml
