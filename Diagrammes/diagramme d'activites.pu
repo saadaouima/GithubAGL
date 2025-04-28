@@ -1,0 +1,42 @@
+@startuml Diagramme d'activites
+title **Diagramme d’activité**
+skinparam monochrome true
+skinparam activityDiamondBackgroundColor white
+
+partition "Utilisateur" {
+    start
+    :accède au site;
+    :s'authentifie;
+    if (authentification réussie?) then (oui)
+        :accède à son compte;
+    else
+        :crée son compte;
+        :accède à son compte;
+    endif
+    :navigue dans le catalogue;
+    :ajoute les produits au panier;
+    :valide le panier;
+    :procède au paiement sécurisé;
+    if (paiement réussi?) then (oui)
+        :confirmation envoyée;
+        :reçoit une confirmation;
+    else (non)
+        :notification d'échec envoyée;
+    endif
+    stop
+}
+
+partition "Administrateur" {
+    start
+    :accède à l'interface d'administrateur;
+    :s'authentifie;
+    if (authentification réussie?) then (oui)
+        :accède au catalogue;
+        :ajoute, modifie ou supprime des produits;
+        :le système met à jour le catalogue;
+    else (non)
+        :affiche authentification non réussie;
+    endif
+    stop
+}
+@enduml
